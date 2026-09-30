@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { countByStage, moveDeal, nextStage, parseDeals, pipelineTotal, SEED, updateNotes } from "./deals";
+import { countByStage, MAX_NOTE, moveDeal, nextStage, parseDeals, pipelineTotal, SEED, updateNotes } from "./deals";
 
 describe("stages", () => {
   it("advances and retreats within bounds", () => {
@@ -39,5 +39,21 @@ describe("parseDeals", () => {
     expect(deals?.[0]).toMatchObject({ stage: "Close", next: "Sign", value: 68000 });
     expect(deals?.[1].stage).toBe("Shape");
     expect(parseDeals("{")).toBeNull();
+  });
+});
+
+describe("note edge cases", () => {
+  const id = SEED[0].id;
+  it("ignores a next action or blocker made only of zero-width characters", () => {
+    const [deal] = updateNotes(SEED, id, { next: "\u200B\u200D", blocker: "\uFEFF " });
+    expect(deal.next).toBe(SEED[0].next);
+    expect(deal.blocker).toBe(SEED[0].blocker);
+    expect(parseDeals(JSON.stringify([{ id, next: "\u200B" }]))?.[0].next).toBe(SEED[0].next);
+  });
+
+  it("never stores half an emoji at the note limit", () => {
+    const text = `${"x".repeat(MAX_NOTE - 1)}🚀 later`;
+    expect(updateNotes(SEED, id, { next: text })[0].next).toBe("x".repeat(MAX_NOTE - 1));
+    expect(parseDeals(JSON.stringify([{ id, blocker: text }]))?.[0].blocker).toBe("x".repeat(MAX_NOTE - 1));
   });
 });

@@ -11,6 +11,16 @@ export const SEED: Deal[] = [
 
 export const MAX_NOTE = 160;
 
+/**
+ * Trim, drop zero-width characters / BOM, and cut to MAX_NOTE UTF-16 units
+ * without leaving half of an emoji. Returns "" when nothing visible remains.
+ */
+export function cleanNote(text: string): string {
+  const value = text.replace(/[\u200B-\u200D\u2060\uFEFF]/g, "").trim();
+  if (value.length <= MAX_NOTE) return value;
+  return value.slice(0, /[\uD800-\uDBFF]/.test(value[MAX_NOTE - 1]) ? MAX_NOTE - 1 : MAX_NOTE).trimEnd();
+}
+
 export function nextStage(stage: Stage): Stage | null {
   const index = STAGES.indexOf(stage);
   return index < STAGES.length - 1 ? STAGES[index + 1] : null;
@@ -33,8 +43,8 @@ export function moveDeal(deals: Deal[], id: string, direction: 1 | -1): Deal[] {
 export function updateNotes(deals: Deal[], id: string, notes: { next?: string; blocker?: string }): Deal[] {
   return deals.map((deal) => {
     if (deal.id !== id) return deal;
-    const next = notes.next?.trim().slice(0, MAX_NOTE);
-    const blocker = notes.blocker?.trim().slice(0, MAX_NOTE);
+    const next = notes.next === undefined ? "" : cleanNote(notes.next);
+    const blocker = notes.blocker === undefined ? "" : cleanNote(notes.blocker);
     return { ...deal, next: next || deal.next, blocker: blocker || deal.blocker };
   });
 }
@@ -63,8 +73,8 @@ export function parseDeals(raw: string | null, seed: Deal[] = SEED): Deal[] | nu
       return {
         ...deal,
         stage: (STAGES as readonly unknown[]).includes(saved.stage) ? (saved.stage as Stage) : deal.stage,
-        next: typeof saved.next === "string" && saved.next.trim() ? saved.next.slice(0, MAX_NOTE) : deal.next,
-        blocker: typeof saved.blocker === "string" && saved.blocker.trim() ? saved.blocker.slice(0, MAX_NOTE) : deal.blocker,
+        next: (typeof saved.next === "string" && cleanNote(saved.next)) || deal.next,
+        blocker: (typeof saved.blocker === "string" && cleanNote(saved.blocker)) || deal.blocker,
       };
     });
   } catch {

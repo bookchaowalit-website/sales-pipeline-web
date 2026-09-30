@@ -21,3 +21,11 @@ Score: 7/10 (was 5/10) — the desk's primary job (record the next action withou
 
 - Added config-driven canonical host (the app had no sitemap or robots at all): `lib/site.ts` resolves `NEXT_PUBLIC_SITE_URL` (validated; clear error on a non-http(s) value, default is the Vercel project URL) and feeds `metadataBase` plus generated `app/sitemap.ts` / `app/robots.ts` (`/api/` disallowed), matching the portfolio-wide pattern. Tested in `lib/site.test.ts`.
 - The blocker is editable ("Update the blocker" form next to the next-action form, labelled input, blank input ignored, persisted); tested in `lib/deals.test.ts`.
+
+## Done in this pass (pass 3)
+- Edge-case pass on `lib/deals.ts` (regression tests in `lib/deals.test.ts`):
+  - A next action / blocker made only of zero-width characters or BOM replaced
+    the real note with blank-looking text (in the editor and from storage).
+    New `cleanNote` strips them and keeps the previous note.
+  - Notes were cut at `MAX_NOTE` with `slice`, leaving a lone surrogate when an
+    emoji straddled the limit; the whole emoji is now dropped.
