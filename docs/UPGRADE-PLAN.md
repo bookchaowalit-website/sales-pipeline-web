@@ -7,7 +7,6 @@ Score: 7/10 (was 5/10) — the desk's primary job (record the next action withou
 ## Backlog
 
 - P1: Add/edit deals (company, contact, value) beyond the fixed sample set.
-- P1: Edit the blocker text (the model supports it; UI only exposes next action).
 - P2: Show real "age" from a stored stage-entered date instead of static strings.
 - P2: Playwright smoke test for select → record → advance → reload.
 
@@ -21,3 +20,4 @@ Score: 7/10 (was 5/10) — the desk's primary job (record the next action withou
 ## Done in this pass (pass 2)
 
 - Added config-driven canonical host (the app had no sitemap or robots at all): `lib/site.ts` resolves `NEXT_PUBLIC_SITE_URL` (validated; clear error on a non-http(s) value, default is the Vercel project URL) and feeds `metadataBase` plus generated `app/sitemap.ts` / `app/robots.ts` (`/api/` disallowed), matching the portfolio-wide pattern. Tested in `lib/site.test.ts`.
+- The blocker is editable ("Update the blocker" form next to the next-action form, labelled input, blank input ignored, persisted); tested in `lib/deals.test.ts`.

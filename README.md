@@ -5,7 +5,7 @@ A local deal desk for seeing the next action and blocker behind a small sample p
 ## Features
 
 - Filter the ledger by stage; select a deal to read its brief
-- Record a new next action, move the deal forward or back a stage
+- Record a new next action or update the blocker, move the deal forward or back a stage
 - Changes persist in localStorage (validated against the sample set); "Reset sample" restores it
 
 ## Run

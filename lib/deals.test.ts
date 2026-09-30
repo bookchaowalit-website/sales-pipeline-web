@@ -22,6 +22,14 @@ describe("updateNotes", () => {
     expect(updated[0].next).toBe("Call Mina Friday");
     expect(updated[0].blocker).toBe(SEED[0].blocker);
   });
+
+  it("updates only the blocker of the chosen deal and persists it", () => {
+    const updated = updateNotes(SEED, "d-02", { blocker: " Budget owner joins Tuesday " });
+    expect(updated[1].blocker).toBe("Budget owner joins Tuesday");
+    expect(updated[1].next).toBe(SEED[1].next);
+    expect(updated[0]).toEqual(SEED[0]);
+    expect(parseDeals(JSON.stringify(updated))?.[1].blocker).toBe("Budget owner joins Tuesday");
+  });
 });
 
 describe("parseDeals", () => {
