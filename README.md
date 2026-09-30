@@ -26,3 +26,7 @@ npm run build
 ```
 
 CI runs the same checks on every push (`.github/workflows/ci.yml`).
+
+## Configuration
+
+- `NEXT_PUBLIC_SITE_URL` (optional): canonical origin used for metadata, `/sitemap.xml` and `/robots.txt`. Defaults to `https://bookchaowalit-sales-pipeline-frontend.vercel.app`; must be an absolute http(s) URL.
