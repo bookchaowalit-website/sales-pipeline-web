@@ -29,3 +29,4 @@ Score: 7/10 (was 5/10) — the desk's primary job (record the next action withou
     New `cleanNote` strips them and keeps the previous note.
   - Notes were cut at `MAX_NOTE` with `slice`, leaving a lone surrogate when an
     emoji straddled the limit; the whole emoji is now dropped.
+- Security deps: `next` 16.1.6 -> 16.3.8 (and `eslint-config-next`) clears critical GHSA-2xp9-vwfh-vxw4 (Image Optimization RCE) plus bundled postcss/sharp highs; lockfile regenerated with same-major `npm audit fix`. `npm audit --omit=dev`: C1/H2/M0/L0 [next:c,postcss:h,sharp:h] -> C0/H0/M0/L0.
