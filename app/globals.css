@@ -20,3 +20,12 @@ button:focus-visible { outline: 3px solid var(--red); outline-offset: 4px; }
 @media (max-width: 800px) { .deal-hero, .deal-workspace { display: block; }.deal-tally { width: 250px; margin: 50px 0 0 auto; }.deal-brief { margin-top: 42px; }.deal-controls { display: block; }.stage-tabs { margin-top: 14px; flex-wrap: wrap; justify-content: start; } }
 @media (max-width: 560px) { .deal-page { padding-inline: 16px; }.deal-topbar > span:nth-child(2) { display: none; }.deal-hero { padding: 72px 0 58px; }.deal-hero h1 { font-size: clamp(4rem, 19vw, 6rem); }.ledger-head { display: none; }.deal-row { grid-template-columns: 1fr 74px; gap: 9px; padding: 14px 0; }.deal-stage { grid-column: 2; grid-row: 1 / span 2; align-self: start; }.deal-value { grid-column: 1; font-size: 12px; }.deal-age { display: none; }.deal-footer { display: grid; gap: 8px; } }
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: .01ms !important; } }
+.deal-reset { border: 0; background: transparent; color: inherit; font: inherit; letter-spacing: inherit; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
+.next-form { margin-top: 20px; }
+.next-form label { display: block; color: var(--muted); font: 10px "Courier New", monospace; letter-spacing: .1em; text-transform: uppercase; }
+.next-form div { display: flex; gap: 8px; margin-top: 8px; }
+.next-form input { flex: 1; min-width: 0; border: 1px solid var(--line); background: var(--sheet); padding: 10px; font: 15px Georgia, serif; color: var(--ink); }
+.next-form button { border: 1px solid var(--ink); background: var(--ink); color: var(--sheet); padding: 0 14px; font: 11px "Courier New", monospace; text-transform: uppercase; cursor: pointer; }
+.next-form button:disabled { opacity: .4; cursor: not-allowed; }
+.retreat-button { width: 100%; margin-top: 8px; border: 1px solid var(--line); padding: 10px; background: transparent; color: var(--muted); font: 11px "Courier New", monospace; text-transform: uppercase; cursor: pointer; }
+.brief-notice { min-height: 1.3em; margin: 10px 0 0; color: var(--blue); font: 11px "Courier New", monospace; }
