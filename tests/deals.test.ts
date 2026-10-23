@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { countByStage, MAX_NOTE, moveDeal, nextStage, parseDeals, pipelineTotal, SEED, updateNotes } from "./deals";
+import { countByStage, MAX_NOTE, moveDeal, nextStage, parseDeals, pipelineTotal, SEED, updateNotes } from "@/lib/deals";
 
 describe("stages", () => {
   it("advances and retreats within bounds", () => {
