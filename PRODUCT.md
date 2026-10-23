@@ -31,9 +31,9 @@ A solo seller who wants to see the next action and blocker per deal at a glance,
 
 - Live: https://sales.bookchaowalit.com (HTTP 200 on 2026-10-23).
 - The Vercel project `bookchaowalit-sales-pipeline-frontend` is Git-linked to this repository, so a push to `main`
-  ships to production. The CVE patch deployed by Git on 2026-10-23 12:31 (commit be89acc, READY). Pushes after that
-  may not deploy on 2026-10-23 because Vercel's free plan hit its 100-deployments/day limit; the coordinator deploys
-  the latest green `main` after the quota resets.
+  ships to production. The CVE patch deployed by Git on 2026-10-23 (commit be89acc, READY), and the L2 work (tests,
+  Sentry, canonical origin fix) deployed by Git on 2026-10-23 (commit 1a56868, READY; live robots.txt now names
+  sales.bookchaowalit.com).
 - `NEXT_PUBLIC_SENTRY_DSN` is set on the Vercel project (Sentry project `sales-pipeline-web`, org `personal-yu0`).
 
 ## Boundaries
