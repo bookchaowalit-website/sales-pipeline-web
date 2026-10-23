@@ -38,3 +38,9 @@ describe("robots and sitemap routes", () => {
     expect(sitemap()).toEqual(buildSitemap());
   });
 });
+
+describe("DEFAULT_SITE_URL", () => {
+  it("is the live custom domain (the old vercel.app name answers 404)", () => {
+    expect(DEFAULT_SITE_URL).toBe("https://sales.bookchaowalit.com");
+  });
+});

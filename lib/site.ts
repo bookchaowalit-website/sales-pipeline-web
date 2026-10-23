@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 
 /** Default canonical origin; override per deployment with NEXT_PUBLIC_SITE_URL. */
-export const DEFAULT_SITE_URL = "https://bookchaowalit-sales-pipeline-frontend.vercel.app";
+export const DEFAULT_SITE_URL = "https://sales.bookchaowalit.com";
 
 /** Public routes listed in sitemap.xml (keep in sync with app/). */
 export const PUBLIC_ROUTES = ["/"] as const;
